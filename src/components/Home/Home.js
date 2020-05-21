@@ -17,7 +17,7 @@ class Home extends Component {
                     ?
                     <>
                         {this.props.reduxState.disregards.allDisregards.map((disregard) => (
-                            <Disregard disregard={disregard} />
+                            <Disregard disregard={disregard} key={disregard.disregardId}/>
                         ))}
                     </>
                     :

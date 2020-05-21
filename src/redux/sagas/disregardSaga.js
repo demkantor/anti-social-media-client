@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {takeEvery, put} from "redux-saga/effects";
+import { takeEvery, put } from "redux-saga/effects";
 
 // these sagas take the dispatch and runs them before they get to the reducers
 function* disregardSaga() {
