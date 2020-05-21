@@ -1,5 +1,7 @@
 {
-  "name": "anti-social-media-client",
+  "name": "anti-social-network",
+  "description": "A place where it's okay not to love social media",
+  "author": "demkantor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
