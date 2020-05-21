@@ -13,10 +13,10 @@ const styles = {
         textAlign: 'center'
     },
     image: {
-        margin: '20px auto 20px auto'
+        margin: '20px auto 0px auto'
     },
     pageTitle: {
-        margin: '10px auto 10px auto'
+        margin: '0px auto 10px auto'
     },
     textField: {
         margin: '10px auto 10px auto'
@@ -32,8 +32,7 @@ class Login extends Component {
     state = {
         email: '',
         password: '',
-        loading: false,
-        errors: {}
+        loading: false
     }
 
     handleChange = (event) => {
@@ -44,16 +43,20 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            loading: true
-        });
-        this.props.dispatch({ type: 'LOGIN_USER', payload: this.state });
+        if (this.state.email && this.state.password) {
+            this.setState({ loading: true });
+            this.props.dispatch({ type: 'LOGIN_USER', payload: this.state });
+            this.props.history.push('/');
+        } else {
+            this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+            this.setState({ loading: false });
+        }
     }
 
 
 
     render() {
-        const { classes } = this.props
+        const { classes } = this.props;
         return (
             <Grid container className={classes.form}>
                 <Grid item sm/>
@@ -69,6 +72,8 @@ class Login extends Component {
                             type="email" 
                             label="Email" 
                             className={classes.textField}
+                            helperText={this.props.reduxState.errors.loginMessage}
+                            error={this.props.reduxState.errors.loginMessage ? true : false}
                             value={this.state.email}
                             onChange={this.handleChange}
                             fullWidth/>
@@ -78,6 +83,8 @@ class Login extends Component {
                             type="password" 
                             label="Password" 
                             className={classes.textField}
+                            helperText={this.props.reduxState.errors.loginMessage}
+                            error={this.props.reduxState.errors.loginMessage ? true : false}
                             value={this.state.password}
                             onChange={this.handleChange}
                             fullWidth/>
@@ -90,7 +97,16 @@ class Login extends Component {
                         </Button>
                     </form>
                 </Grid>
-                <Grid item sm/>
+                <Grid item sm>
+                    {this.props.reduxState.errors.loginMessage && (
+                    <Typography 
+                        variant="body2" 
+                        className={classes.customError} 
+                        role="alert">
+                            {this.props.reduxState.errors.loginMessage}
+                    </Typography>
+                    )}
+                </Grid>
             </Grid>
         )
     }

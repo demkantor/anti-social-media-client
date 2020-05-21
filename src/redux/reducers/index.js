@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import disregards from './disregardReducer';
 import user from './userReducer';
+import errors from './errorReducer';
 
 
 
@@ -8,6 +9,8 @@ import user from './userReducer';
 const rootReducer = combineReducers({
     disregards,
     user,
+    errors,
+    
 });
   
 export default rootReducer;
