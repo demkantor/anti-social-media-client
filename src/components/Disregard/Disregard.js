@@ -60,6 +60,6 @@ class Disregard extends Component {
             </Card>
         )
     }
-}
+};
 
 export default withStyles(styles)(Disregard);

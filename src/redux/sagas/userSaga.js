@@ -67,11 +67,13 @@ function* registerUser(action) {
 
 //gets the current user info from firebase
 function* getThisUser(user){
+    yield put({ type: 'LOADING_UI' });
     console.log("We are here in user GET info saga", user.payload);
     // const thisUser = yield axios.get(`/user/${user.payload}`);
     const thisUser = yield axios.get(`/user`);
     console.log('in saga - this user GET back with:', thisUser.data);
-    yield put({ type: 'SET_USER', payload: thisUser.data })
+    yield put({ type: 'SET_USER', payload: thisUser.data });
+    yield put({ type: 'STOP_LOADING_UI' });
 };
 
 // holds current user's firebase token to be used in api headers

@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.css';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import jwtDecode from 'jwt-decode';
+
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import themeObject from '../../util/theme';
-import jwtDecode from 'jwt-decode';
+import './App.css';
+
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Nav from '../Nav/Nav';
 import AuthRoute from '../../util/AuthRoute';
-import { connect } from 'react-redux';
 
+// holds MUI themes spread through components
 const theme = createMuiTheme(themeObject);
 
 
-
 class App extends Component {
+
 
   componentDidMount = () => {
       // checks for json token and expier date
@@ -33,11 +36,10 @@ class App extends Component {
       }
   }
 
+
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
-       
-        <h1>The Anti-Social-Network</h1>
+      <MuiThemeProvider theme={ theme }>
         <Router>
           <Nav/>
           <div className="container">
@@ -48,7 +50,6 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-      
       </MuiThemeProvider>
     )
   }

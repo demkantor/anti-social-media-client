@@ -12,12 +12,12 @@ const AuthRoute = ({ component: Component, authenticated, ...rest }) => (
   />
 );
 
-const mapStateToProps = (state) => ({
-  authenticated: state.user.authenticated
+const putReduxStateOnProps = (reduxState) => ({
+  authenticated: reduxState.user.currentUser.authenticated
 });
 
 AuthRoute.propTypes = {
   user: PropTypes.object
 };
 
-export default connect(mapStateToProps)(AuthRoute);
+export default connect(putReduxStateOnProps)(AuthRoute);

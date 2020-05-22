@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import Disregard from '../Disregard/Disregard';
+import Profile from '../Profile/Profile';
 
 class Home extends Component {
     
@@ -25,7 +26,7 @@ class Home extends Component {
                     }
                 </Grid>
                 <Grid item sm={4} xs={12}>
-                    <p>Profile...</p>
+                    <Profile/>
                 </Grid>
             </Grid>
         )
