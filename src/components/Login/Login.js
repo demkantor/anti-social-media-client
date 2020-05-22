@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const styles = {
@@ -22,7 +24,15 @@ const styles = {
         margin: '10px auto 10px auto'
     },
     button: {
-        marginTop: 20
+        marginTop: 20,
+        position: 'relative'
+    },
+    customError: {
+        color: 'red',
+        marginTop: 10
+    },
+    progress: {
+        position: 'absolute'
     }
 }
 
@@ -38,15 +48,17 @@ class Login extends Component {
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
-        })
+        });
+        this.setState({ loading: false });
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.state.email && this.state.password) {
             this.setState({ loading: true });
-            this.props.dispatch({ type: 'LOGIN_USER', payload: this.state });
-            this.props.history.push('/');
+            const { history } = this.props
+            this.props.dispatch({ type: 'LOGIN_USER', payload: this.state, history });
+            // this.props.history.push('/');
         } else {
             this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
             this.setState({ loading: false });
@@ -72,8 +84,8 @@ class Login extends Component {
                             type="email" 
                             label="Email" 
                             className={classes.textField}
-                            helperText={this.props.reduxState.errors.loginMessage}
-                            error={this.props.reduxState.errors.loginMessage ? true : false}
+                            helperText={this.props.reduxState.errors.loginMessage.email}
+                            error={this.props.reduxState.errors.loginMessage.email ? true : false}
                             value={this.state.email}
                             onChange={this.handleChange}
                             fullWidth/>
@@ -83,34 +95,39 @@ class Login extends Component {
                             type="password" 
                             label="Password" 
                             className={classes.textField}
-                            helperText={this.props.reduxState.errors.loginMessage}
-                            error={this.props.reduxState.errors.loginMessage ? true : false}
+                            helperText={this.props.reduxState.errors.loginMessage.password}
+                            error={this.props.reduxState.errors.loginMessage.password ? true : false}
                             value={this.state.password}
                             onChange={this.handleChange}
                             fullWidth/>
+                        {this.props.reduxState.errors.loginMessage && (
+                            <Typography 
+                                variant="body2" 
+                                className={classes.customError} 
+                                role="alert">
+                                    {this.props.reduxState.errors.loginMessage.general}
+                                    {this.props.reduxState.errors.loginMessage.error}
+                            </Typography>
+                        )}
                         <Button 
                             type="submit" 
                             variant="contained" 
                             color="primary" 
+                            disabled={this.state.loading}
                             className={classes.button}>
                                 Login
+                                {this.state.loading === true &&
+                                <CircularProgress size={30} className={classes.progress}/>
+                                }
                         </Button>
                     </form>
+                    <small>Don't have an account? Register <Link to="/register">HERE</Link></small>
                 </Grid>
-                <Grid item sm>
-                    {this.props.reduxState.errors.loginMessage && (
-                    <Typography 
-                        variant="body2" 
-                        className={classes.customError} 
-                        role="alert">
-                            {this.props.reduxState.errors.loginMessage}
-                    </Typography>
-                    )}
-                </Grid>
+                <Grid item sm/>
             </Grid>
         )
     }
-}
+};
 
 Login.propTypes = {
     classes: PropTypes.object.isRequired
