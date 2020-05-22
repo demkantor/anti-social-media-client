@@ -9,7 +9,7 @@ const currentUser = (state = {}, action) => {
             return {};
         default:
             return state;
-    }
+    };
 };
 
 

@@ -34,7 +34,7 @@ const styles = {
     progress: {
         position: 'absolute'
     }
-}
+};
 
 
 class Login extends Component {
@@ -45,12 +45,22 @@ class Login extends Component {
         loading: false
     }
 
+    // just me throwing in silly stuff
+    hacker=()=>{
+        for(let i=10; i>0; i--){
+            console.log("hacking will commence in", i,"...")
+            if(i===1){
+                console.log("hacking complete.... I'm in!")
+            }
+        }
+    };
+
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         });
         this.setState({ loading: false });
-    }
+    };
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -58,12 +68,11 @@ class Login extends Component {
             this.setState({ loading: true });
             const { history } = this.props
             this.props.dispatch({ type: 'LOGIN_USER', payload: this.state, history });
-            // this.props.history.push('/');
         } else {
             this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
             this.setState({ loading: false });
         }
-    }
+    };
 
 
 
@@ -121,7 +130,7 @@ class Login extends Component {
                                 }
                         </Button>
                     </form>
-                    <small>Don't have an account? Register <Link to="/register">HERE</Link></small>
+                    <small>Don't have an account? Register <Link to="/register" onClick={this.hacker}>HERE</Link></small>
                 </Grid>
                 <Grid item sm/>
             </Grid>
