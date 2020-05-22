@@ -32,9 +32,21 @@ const registrationMessage = (state = '', action) => {
     };
 };
 
+// holds the string that will display on the registration screen if there's an error
+const ui = (state = { loading: false }, action) => {
+    switch (action.type) {
+        case 'LOADING_UI':
+            return state = { loading: true };
+        case 'STOP_LOADING_UI':
+            return state = { loading: false };
+        default:
+            return state;
+    };
+};
 
 
 export default combineReducers({
   loginMessage,
   registrationMessage,
+  ui
 });

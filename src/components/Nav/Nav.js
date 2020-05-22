@@ -14,7 +14,7 @@ class Nav extends Component {
         return (
             <AppBar>
                 <Toolbar className="nav-container">
-                    {this.props.reduxState.user.currentUser.token
+                    {this.props.reduxState.user.token
                     ?
                         <Button 
                             onClick={()=>this.props.dispatch({ type: 'LOGOUT' })} 

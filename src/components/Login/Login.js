@@ -41,8 +41,7 @@ class Login extends Component {
 
     state = {
         email: '',
-        password: '',
-        loading: false
+        password: ''
     }
 
     // just me throwing in silly stuff
@@ -59,22 +58,24 @@ class Login extends Component {
         this.setState({
             [event.target.name]: event.target.value
         });
-        this.setState({ loading: false });
     };
 
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.state.email && this.state.password) {
-            this.setState({ loading: true });
+            this.props.dispatch({ type: 'LOADING_UI' });
             const { history } = this.props
             this.props.dispatch({ type: 'LOGIN_USER', payload: this.state, history });
         } else {
             this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-            this.setState({ loading: false });
+            this.props.dispatch({ type: 'STOP_LOADING_UI' });
         }
     };
 
-
+    // keeps submit from being disabled after error
+    stopLoading = () => {
+        this.props.dispatch({ type: 'STOP_LOADING_UI' });
+    }
 
     render() {
         const { classes } = this.props;
@@ -97,6 +98,7 @@ class Login extends Component {
                             error={this.props.reduxState.errors.loginMessage.email ? true : false}
                             value={this.state.email}
                             onChange={this.handleChange}
+                            onClick={this.stopLoading}
                             fullWidth/>
                         <TextField 
                             id="password" 
@@ -108,6 +110,7 @@ class Login extends Component {
                             error={this.props.reduxState.errors.loginMessage.password ? true : false}
                             value={this.state.password}
                             onChange={this.handleChange}
+                            onClick={this.stopLoading}
                             fullWidth/>
                         {this.props.reduxState.errors.loginMessage && (
                             <Typography 
@@ -122,10 +125,10 @@ class Login extends Component {
                             type="submit" 
                             variant="contained" 
                             color="primary" 
-                            disabled={this.state.loading}
+                            disabled={this.props.reduxState.errors.loading}
                             className={classes.button}>
                                 Login
-                                {this.state.loading === true &&
+                                {this.props.reduxState.errors.loading === true &&
                                 <CircularProgress size={30} className={classes.progress}/>
                                 }
                         </Button>

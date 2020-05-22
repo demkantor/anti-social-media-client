@@ -43,30 +43,31 @@ class Register extends Component {
         email: '',
         password: '',
         confirmPassword: '',
-        handle: '',
-        loading: false
+        handle: ''
     }
 
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         });
-        this.setState({ loading: false });
     };
 
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.state.email && this.state.password && this.state.confirmPassword && this.state.handle) {
-            this.setState({ loading: true });
+            this.props.dispatch({ type: 'LOADING_UI' });
             const { history } = this.props
             this.props.dispatch({ type: 'REGISTER_USER', payload: this.state, history });
         } else {
             this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
-            this.setState({ loading: false });
+            this.props.dispatch({ type: 'STOP_LOADING_UI' });
         }
     };
 
-
+    // keeps submit from being disabled after error
+    stopLoading = () => {
+        this.props.dispatch({ type: 'STOP_LOADING_UI' });
+    }
 
     render() {
         const { classes } = this.props;
@@ -89,6 +90,7 @@ class Register extends Component {
                             error={this.props.reduxState.errors.registrationMessage.email ? true : false}
                             value={this.state.email}
                             onChange={this.handleChange}
+                            onClick={this.stopLoading}
                             fullWidth/>
                         <TextField 
                             id="password" 
@@ -100,6 +102,7 @@ class Register extends Component {
                             error={this.props.reduxState.errors.registrationMessage.password ? true : false}
                             value={this.state.password}
                             onChange={this.handleChange}
+                            onClick={this.stopLoading}
                             fullWidth/>
                         <TextField 
                             id="confirmPassword" 
@@ -111,6 +114,7 @@ class Register extends Component {
                             error={this.props.reduxState.errors.registrationMessage.confirmPassword ? true : false}
                             value={this.state.confirmPassword}
                             onChange={this.handleChange}
+                            onClick={this.stopLoading}
                             fullWidth/>
                         <TextField 
                             id="handle" 
@@ -122,6 +126,7 @@ class Register extends Component {
                             error={this.props.reduxState.errors.registrationMessage.handle ? true : false}
                             value={this.state.handle}
                             onChange={this.handleChange}
+                            onClick={this.stopLoading}
                             fullWidth/>
                         {this.props.reduxState.errors.registrationMessage && (
                             <Typography 
@@ -136,10 +141,10 @@ class Register extends Component {
                             type="submit" 
                             variant="contained" 
                             color="primary" 
-                            disabled={this.state.loading}
+                            disabled={this.props.reduxState.errors.loading}
                             className={classes.button}>
                                 Register
-                                {this.state.loading === true &&
+                                {this.props.reduxState.errors.loading === true &&
                                 <CircularProgress size={30} className={classes.progress}/>
                                 }
                         </Button>

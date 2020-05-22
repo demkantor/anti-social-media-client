@@ -10,22 +10,32 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Nav from '../Nav/Nav';
 import AuthRoute from '../../util/AuthRoute';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 const theme = createMuiTheme(themeObject);
 
-let authenticated;
-const token = localStorage.FBIdToken;
-if(token){
-  const decodedToken = jwtDecode(token);
-  // console.log(decodedToken);
-  if(decodedToken.exp * 1000 < Date.now()){
-    window.location.href = '/login'
-    authenticated = false;
-  } else 
-    authenticated =  true;
-}
 
-export class App extends Component {
+
+class App extends Component {
+
+  componentDidMount = () => {
+      // checks for json token and expier date
+      const token = localStorage.FBIdToken;
+      if(token){
+          const decodedToken = jwtDecode(token);
+          // console.log(decodedToken);
+          if(decodedToken.exp * 1000 < Date.now()){
+              this.props.dispatch({ type: 'LOGOUT' });
+              window.location.href = '/login'
+      } else 
+          this.props.dispatch({ type: 'SET_AUTHENTICATED' });
+          console.log(axios.defaults)
+          
+          this.props.dispatch({ type: 'GET_THIS_USER' });
+      }
+  }
+
   render() {
     return (
       <MuiThemeProvider theme={theme}>
@@ -36,8 +46,8 @@ export class App extends Component {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Home}/>
-              <AuthRoute exact path="/login" component={Login} authenticated={authenticated}/>
-              <AuthRoute exact path="/register" component={Register} authenticated={authenticated}/>
+              <AuthRoute exact path="/login" component={Login}/>
+              <AuthRoute exact path="/register" component={Register}/>
             </Switch>
           </div>
         </Router>
@@ -45,6 +55,6 @@ export class App extends Component {
       </MuiThemeProvider>
     )
   }
-}
+};
 
-export default App
+export default connect()(App);
