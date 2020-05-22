@@ -11,7 +11,6 @@ import Register from '../Register/Register';
 import Nav from '../Nav/Nav';
 import AuthRoute from '../../util/AuthRoute';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 const theme = createMuiTheme(themeObject);
 
@@ -30,8 +29,6 @@ class App extends Component {
               window.location.href = '/login'
       } else 
           this.props.dispatch({ type: 'SET_AUTHENTICATED' });
-          console.log(axios.defaults)
-          
           this.props.dispatch({ type: 'GET_THIS_USER' });
       }
   }
@@ -39,7 +36,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <div>
+       
         <h1>The Anti-Social-Network</h1>
         <Router>
           <Nav/>
@@ -51,7 +48,7 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-      </div>
+      
       </MuiThemeProvider>
     )
   }
