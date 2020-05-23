@@ -27,17 +27,20 @@ class Disregard extends Component {
         dayjs.extend(relativeTime);
         const { classes, disregard : { body, createdAt, userImage, userHandle, disregardId, respectCount, commentCount } } = this.props;
         return (
-            <Card className={classes.card}>
-                {userImage 
-                ? 
-                    <CardMedia
-                        image={userImage}
-                        title="Profile image"
-                        className={classes.image}
-                        />
-                : 
-                    <p>Loading...</p>
-                }
+        <>
+            {body
+            ?
+                <Card className={classes.card}>
+                    {userImage 
+                    ? 
+                        <CardMedia
+                            image={userImage}
+                            title="Profile image"
+                            className={classes.image}
+                            />
+                    : 
+                        <p>Loading...</p>
+                    }
                     <CardContent className={classes.content}>
                         <Typography
                             variant="h5" 
@@ -57,7 +60,12 @@ class Disregard extends Component {
                                 {body}
                         </Typography>
                     </CardContent>
-            </Card>
+                </Card>
+                
+            :
+            <p>Loading...</p>
+            }
+        </>
         )
     }
 };

@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
-import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
+import EditProfile from '../EditProfile/EditProfile';
+
+import withStyles from '@material-ui/core/styles/withStyles';
 import MuiLink from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
+
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-import Tooltip from '@material-ui/core/Tooltip';
+import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+
 
 const styles = (theme) => ({
     ...theme.componentThemes
@@ -33,6 +38,7 @@ class Profile extends Component {
         formData.append('image', image, image.name);
         this.props.dispatch({ type: 'UPLOAD_IMAGE', payload: formData });
     }
+
 
     render() {
         const { classes } = this.props;
@@ -91,6 +97,12 @@ class Profile extends Component {
                                 Joined {dayjs(this.props.reduxState.user.currentUser.credentials.createdAt).format('MMM YYYY')}
                             </span>
                     </div>
+                    <Tooltip title="Logout" placement="top">
+                        <IconButton onClick={()=>this.props.dispatch({ type: 'LOGOUT' })}>
+                            <KeyboardReturn color="primary"/>
+                        </IconButton>
+                    </Tooltip>
+                    <EditProfile/>
                 </div>
             </Paper>
             </>

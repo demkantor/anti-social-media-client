@@ -9,6 +9,7 @@ function* userSaga() {
     yield takeLatest('REGISTER_USER', registerUser);
     yield takeEvery('GET_THIS_USER', getThisUser);
     yield takeEvery('UPLOAD_IMAGE', uploadImage);
+    yield takeEvery('BIO_EDIT', bioEdit);
    
 };
 
@@ -76,7 +77,7 @@ function* getThisUser(user){
 
 // uploads image to firebase
 function* uploadImage(pic) {
-    yield console.log('in upload image saga', pic);
+    console.log('in upload image saga', pic);
     yield put({ type: 'LOADING_UI' });
     try {
         yield axios.post('/user/image', pic.payload);
@@ -85,6 +86,18 @@ function* uploadImage(pic) {
         console.log('Error with image upload:', error);
         // yield put({ type: 'IMAGE_UPLOAD_FAILED' });
     }
+};
+
+// user bio edit details sent to firebase
+function* bioEdit(user) {
+    yield console.log('in edit bio', user);
+    yield put({ type: 'LOADING_UI' });
+    // try {
+    //     yield axios.post('/user/image', pic.payload);
+    //     yield put({ type: 'GET_THIS_USER' });
+    // } catch (error) {
+    //     console.log('Error with image upload:', error);
+    // }
 };
 
 
