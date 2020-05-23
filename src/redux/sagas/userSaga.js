@@ -2,15 +2,13 @@ import axios from 'axios'
 import { takeEvery, takeLatest, put } from "redux-saga/effects";
 
 
-
-
-
 // these sagas take the dispatch and runs them before they get to the reducers
 function* userSaga() {
     yield takeEvery('LOGIN_USER', loginUser);
     yield takeEvery('LOGOUT', logoutUser);
     yield takeLatest('REGISTER_USER', registerUser);
     yield takeEvery('GET_THIS_USER', getThisUser);
+    yield takeEvery('UPLOAD_IMAGE', uploadImage);
    
 };
 
@@ -75,6 +73,21 @@ function* getThisUser(user){
     yield put({ type: 'SET_USER', payload: thisUser.data });
     yield put({ type: 'STOP_LOADING_UI' });
 };
+
+// uploads image to firebase
+function* uploadImage(pic) {
+    yield console.log('in upload image saga', pic);
+    yield put({ type: 'LOADING_UI' });
+    try {
+        yield axios.post('/user/image', pic.payload);
+        yield put({ type: 'GET_THIS_USER' });
+    } catch (error) {
+        console.log('Error with image upload:', error);
+        // yield put({ type: 'IMAGE_UPLOAD_FAILED' });
+    }
+};
+
+
 
 // holds current user's firebase token to be used in api headers
 const setAuthorizationHeader = (token) => {
