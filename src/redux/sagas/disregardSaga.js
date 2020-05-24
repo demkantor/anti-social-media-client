@@ -6,8 +6,9 @@ function* disregardSaga() {
     yield takeEvery('GET_ALL_DISREGARDS', getAllDisregards);
     yield takeEvery('RESPECT_DISREGARD', respectDisregard);
     yield takeEvery('DISRESPECT_DISREGARD', disrespectDisregard);
-   
-}
+    yield takeEvery('DELETE_DISREGARD', deleteDisregard);
+};
+
 
 // gets all disregards from firebase db
 function* getAllDisregards(){
@@ -17,7 +18,7 @@ function* getAllDisregards(){
     console.log('in saga - all disregards GET back with:', allDisregards.data);
     yield put({ type: 'SET_ALL_DISREGARDS', payload: allDisregards.data });
     yield put({ type: 'STOP_LOADING_UI' });
-}
+};
 
 // send plus one respect to a disregard
 function* respectDisregard(respect) {
@@ -45,6 +46,18 @@ function* disrespectDisregard(respect) {
         console.log('Error with disrespect disregard:', error);
     }
     yield put({ type: 'STOP_LOADING_UI' });
+};
+
+// remove a disregard
+function* deleteDisregard(remove) {
+    console.log("in saga disregard DELETE with: ", remove.payload);
+    try {
+        yield axios.delete(`/disregards/${remove.payload}/`);
+        yield put({ type: 'GET_ALL_DISREGARDS' });
+        yield put({ type: 'GET_THIS_USER' });
+    } catch(error){
+        console.log(error);
+    }
 };
 
 

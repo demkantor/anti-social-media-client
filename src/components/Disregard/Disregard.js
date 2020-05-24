@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import MagicButton from '../../util/MagicButton';
+import DeleteDisregard from '../DeleteDisregard/DeleteDisregard';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Card from '@material-ui/core/Card';
@@ -16,19 +17,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBoarder from '@material-ui/icons/FavoriteBorder';
 
 
-const styles = {
-    card: {
-        display: 'flex',
-        marginBottom: 20,
-    },
-    image: {
-        minWidth: 200,
-    },
-    content: {
-        padding: 25,
-        objectFit: 'cover',
-    }
-}
+const styles = (theme) => ({
+    ...theme.componentThemes
+});
 
 class Disregard extends Component {
 
@@ -55,7 +46,7 @@ class Disregard extends Component {
     render() {
         dayjs.extend(relativeTime);
         const { classes, disregard : { body, createdAt, userImage, userHandle, disregardId, respectCount, commentCount } } = this.props;
-        const { authenticated } = this.props.user;
+        const { authenticated, credentials : { handle } } = this.props.user;
         const respectButton = !authenticated ? (
             <MagicButton tip="respect">
                 <Link to="/login">
@@ -72,6 +63,11 @@ class Disregard extends Component {
                     <FavoriteBoarder color="primary"/>
                 </MagicButton>
             )
+        );
+        const deleteButton = authenticated && userHandle === handle ? (
+            <DeleteDisregard disregardId={disregardId}/>
+        ) : (
+            <p>erase me</p>
         )
         return (
         <>
@@ -83,7 +79,7 @@ class Disregard extends Component {
                         <CardMedia
                             image={userImage}
                             title="Profile image"
-                            className={classes.image}
+                            className={classes.disImage}
                             />
                     : 
                         <p>Loading...</p>
@@ -96,6 +92,7 @@ class Disregard extends Component {
                             color="primary">
                                 {userHandle}
                         </Typography>
+                        {deleteButton}
                         <Typography 
                             variant="body2" 
                             color="textSecondary">

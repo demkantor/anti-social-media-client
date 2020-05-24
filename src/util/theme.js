@@ -98,6 +98,23 @@ export default {
         '& a': {
           margin: '20px 10px'
         }
+      },
+      deleteButton: {
+        position: 'absolute',
+        left: '90%',
+        top: '10%'
+      },
+      card: {
+        position: 'relative',
+        display: 'flex',
+        marginBottom: 20,
+      },
+      disImage: {
+          minWidth: 200,
+      },
+      content: {
+          padding: 25,
+          objectFit: 'cover',
       }
-    }
+  }
 };
