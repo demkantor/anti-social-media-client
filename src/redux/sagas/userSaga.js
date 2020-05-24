@@ -92,12 +92,12 @@ function* uploadImage(pic) {
 function* bioEdit(user) {
     yield console.log('in edit bio', user);
     yield put({ type: 'LOADING_UI' });
-    // try {
-    //     yield axios.post('/user/image', pic.payload);
-    //     yield put({ type: 'GET_THIS_USER' });
-    // } catch (error) {
-    //     console.log('Error with image upload:', error);
-    // }
+    try {
+        yield axios.post('/user', user.payload);
+        yield put({ type: 'GET_THIS_USER' });
+    } catch (error) {
+        console.log('Error with image upload:', error);
+    }
 };
 
 

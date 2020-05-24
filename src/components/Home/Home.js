@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 import Disregard from '../Disregard/Disregard';
 import Profile from '../Profile/Profile';
 
@@ -31,7 +31,8 @@ class Home extends Component {
             </Grid>
         )
     }
-}
+};
+
 
 const putReduxStateOnProps = (reduxState) => ({
     reduxState

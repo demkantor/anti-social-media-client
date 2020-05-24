@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import EditProfile from '../EditProfile/EditProfile';
+import MagicButton from '../../util/MagicButton';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import MuiLink from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Tooltip from '@material-ui/core/Tooltip';
 
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
@@ -27,17 +26,18 @@ const styles = (theme) => ({
 
 class Profile extends Component {
 
+
     editPicture = () => {
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
-    }
+    };
 
     handleImageChange = (event) => {
         const image = event.target.files[0];
         const formData = new FormData();
         formData.append('image', image, image.name);
         this.props.dispatch({ type: 'UPLOAD_IMAGE', payload: formData });
-    }
+    };
 
 
     render() {
@@ -51,11 +51,12 @@ class Profile extends Component {
                     <div className="image-wrapper">
                         <img src={this.props.reduxState.user.currentUser.credentials.imageUrl} alt="profile" className="profile-image"/>
                         <input type="file" id="imageInput" hidden="hidden" onChange={this.handleImageChange}/>
-                        <Tooltip title="Edit Profile Picture" placement="top">
-                            <IconButton onClick={this.editPicture} className="button">
-                                <EditIcon color="primary" />
-                            </IconButton>
-                        </Tooltip>
+                        <MagicButton 
+                            tip="Edit Profile Picture"
+                            onClick={this.editPicture}
+                            btnClass="button">
+                                <EditIcon color="primary"/>
+                        </MagicButton>
                     </div>
                     <hr/>
                     <div className="profile-details">
@@ -97,11 +98,13 @@ class Profile extends Component {
                                 Joined {dayjs(this.props.reduxState.user.currentUser.credentials.createdAt).format('MMM YYYY')}
                             </span>
                     </div>
-                    <Tooltip title="Logout" placement="top">
-                        <IconButton onClick={()=>this.props.dispatch({ type: 'LOGOUT' })}>
-                            <KeyboardReturn color="primary"/>
-                        </IconButton>
-                    </Tooltip>
+                    <Link to="login">
+                        <MagicButton 
+                                tip="Logout"
+                                onClick={()=>this.props.dispatch({ type: 'LOGOUT' })}>
+                                    <KeyboardReturn color="primary"/>
+                        </MagicButton>
+                    </Link>
                     <EditProfile/>
                 </div>
             </Paper>
@@ -129,9 +132,10 @@ class Profile extends Component {
     }
 };
 
+
 Profile.propTypes = {
     classes: PropTypes.object.isRequired
-}
+};
 
 
 const putReduxStateOnProps = (reduxState) => ({

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 
+
 // stores all disregards
 const allDisregards = (state = [], action) => {
     switch (action.type) {
@@ -9,7 +10,6 @@ const allDisregards = (state = [], action) => {
             return state;
     }
 };
-
 
 
 
