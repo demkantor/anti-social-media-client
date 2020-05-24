@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import PostDisregard from '../PostDisregard/PostDisregard';
+import MagicButton from '../../util/MagicButton';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import MagicButton from '../../util/MagicButton';
-import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
 import Notifications from '@material-ui/icons/Notifications';
+
 
 
 
@@ -27,9 +29,7 @@ class Nav extends Component {
                             component={Link} to="/login">
                                 Log out
                         </Button>
-                        <MagicButton tip="Create A Disregard">
-                            <AddIcon />
-                        </MagicButton>
+                        <PostDisregard/>
                         <MagicButton tip="Notifications">
                             <Notifications />
                         </MagicButton>

@@ -7,6 +7,7 @@ function* disregardSaga() {
     yield takeEvery('RESPECT_DISREGARD', respectDisregard);
     yield takeEvery('DISRESPECT_DISREGARD', disrespectDisregard);
     yield takeEvery('DELETE_DISREGARD', deleteDisregard);
+    yield takeEvery('POST_DISREGARD', postDisregard);
 };
 
 
@@ -30,8 +31,8 @@ function* respectDisregard(respect) {
         yield put({ type: 'GET_THIS_USER' });
     } catch (error) {
         console.log('Error with respect disregard:', error);
+        yield put({ type: 'STOP_LOADING_UI' });
     }
-    yield put({ type: 'STOP_LOADING_UI' });
 };
 
 // sends minus one respect to a disregard
@@ -44,8 +45,22 @@ function* disrespectDisregard(respect) {
         yield put({ type: 'GET_THIS_USER' });
     } catch (error) {
         console.log('Error with disrespect disregard:', error);
+        yield put({ type: 'STOP_LOADING_UI' });
     }
-    yield put({ type: 'STOP_LOADING_UI' });
+};
+
+// posts a new disregard to firebase
+function* postDisregard(dis) {
+    console.log('in POST new disregard saga', dis);
+    yield put({ type: 'LOADING_UI' });
+    try {
+        yield axios.post('/disregards', dis.payload);
+        yield put({ type: 'GET_ALL_DISREGARDS' });
+        yield put({ type: 'GET_THIS_USER' });
+    } catch (error) {
+        console.log('Error with POST disregard:', error);
+        yield put({ type: 'STOP_LOADING_UI' });
+    }
 };
 
 // remove a disregard

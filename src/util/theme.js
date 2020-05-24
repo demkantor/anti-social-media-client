@@ -115,6 +115,14 @@ export default {
       content: {
           padding: 25,
           objectFit: 'cover',
+      },
+      submitButton: {
+        position: 'relative'
+      },
+      closeButton: {
+        position: 'relative',
+        left: '90%',
+        top: '10%'
       }
   }
 };

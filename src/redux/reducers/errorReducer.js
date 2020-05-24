@@ -32,6 +32,18 @@ const registrationMessage = (state = '', action) => {
     };
 };
 
+// holds the string that will display on the disregard screen if there's an error
+const disregardMessage = (state = '', action) => {
+    switch (action.type) {
+        case 'CLEAR_DISREGARD_ERROR':
+            return '';
+        case 'DISREGARD_ERROR':
+            return action.payload;
+        default:
+            return state;
+    };
+};
+
 // holds the string that will display on the registration screen if there's an error
 const ui = (state = { loading: false }, action) => {
     switch (action.type) {
@@ -48,5 +60,6 @@ const ui = (state = { loading: false }, action) => {
 export default combineReducers({
   loginMessage,
   registrationMessage,
+  disregardMessage,
   ui
 });
