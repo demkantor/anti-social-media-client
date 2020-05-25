@@ -15,6 +15,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CloseIcon from '@material-ui/icons/Close';
 import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
+import RespectButton from '../RespectButton/RespectButton';
 
 
 const styles = (theme) => ({
@@ -40,9 +41,11 @@ class DisregardDialog extends Component {
     render() {
         const { classes, disregard : { body, createdAt, userImage, userHandle, disregardId, respectCount, commentCount } } = this.props;
         const dialogMarkup = this.props.errors.ui.loading ? (
-            <CircularProgress size={200}/>
+            <div className={classes.spinnerDiv}>
+                <CircularProgress size={200} thickness={2}/>
+            </div>
         ) : (
-            <Grid container spacing={10}>
+            <Grid container spacing={4}>
                 <Grid item sm={5}>
                     <img src={userImage} alt="profile" className={classes.profileImage}/>
                 </Grid>
@@ -62,6 +65,12 @@ class DisregardDialog extends Component {
                     <Typography variant="body1">
                         {body}
                     </Typography>
+                    <RespectButton disregardId={disregardId}/>
+                    <span>{respectCount} Respects</span>
+                    <MagicButton tip="comments">
+                        <ChatIcon color="primary"/>
+                    </MagicButton>
+                    <span>{commentCount} Comments</span>
                 </Grid>
             </Grid>
         )
@@ -70,7 +79,7 @@ class DisregardDialog extends Component {
                 <MagicButton 
                     onClick={this.handleOpen} 
                     tip="Expand Disregard" 
-                    tipclassName={classes.expandButton}>
+                    tipClass={classes.expandButton}>
                         <UnfoldMore color="primary"/>
                 </MagicButton>
                 <Dialog
@@ -81,7 +90,7 @@ class DisregardDialog extends Component {
                         <MagicButton
                             tip="Close"
                             onClick={this.handleClose}
-                            tipClassName={classes.closeButton}>
+                            tipClass={classes.closeButton}>
                                 <CloseIcon />
                         </MagicButton>
                         <DialogContent className={classes.dialogContent}>

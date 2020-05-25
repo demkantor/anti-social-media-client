@@ -45,7 +45,7 @@ export default {
       progress: {
         position: 'absolute'
       },
-      invisibleSeparator: {
+      invisibleSeperator: {
         border: 'none',
         margin: 4
       },
@@ -134,6 +134,15 @@ export default {
       },
       dialogContent: {
         padding: 20
+      },
+      expandButton: {
+        position: 'absolute',
+        left: '90%'
+      },
+      spinnerDiv: {
+        textAlign: 'center',
+        marginTop: 50,
+        marginBottom: 50
       }
   }
 };

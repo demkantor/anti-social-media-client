@@ -14,8 +14,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ChatIcon from '@material-ui/icons/Chat';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBoarder from '@material-ui/icons/FavoriteBorder';
+import RespectButton from '../RespectButton/RespectButton';
 
 
 const styles = (theme) => ({
@@ -24,47 +23,10 @@ const styles = (theme) => ({
 
 class Disregard extends Component {
 
-    disrespectDisregard = (disregardId) => {
-        this.props.dispatch({ type: 'DISRESPECT_DISREGARD', payload: disregardId })
-    }
-
-    respectDisregard = (disregardId) => {
-        console.log('HERE', disregardId)
-        this.props.dispatch({ type: 'RESPECT_DISREGARD', payload: disregardId })
-    }
-
-    respected = () => {
-        console.log(this.props.user.respects)
-        if(this.props.user.respects && this.props.user.respects.find(respect => respect.disregardId === this.props.disregard.disregardId)) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-
-
     render() {
         dayjs.extend(relativeTime);
         const { classes, disregard : { body, createdAt, userImage, userHandle, disregardId, respectCount, commentCount } } = this.props;
         const { authenticated, credentials : { handle } } = this.props.user;
-        const respectButton = !authenticated ? (
-            <MagicButton tip="respect">
-                <Link to="/login">
-                    <FavoriteBoarder color="primary"/>
-                </Link>
-            </MagicButton>  
-        ) : (
-            this.respected() ? (
-                <MagicButton tip="disrespect" onClick={()=>this.disrespectDisregard(disregardId)}>
-                    <FavoriteIcon color="primary"/>
-                </MagicButton>
-            ) : (
-                <MagicButton tip="respect" onClick={()=>this.respectDisregard(disregardId)}>
-                    <FavoriteBoarder color="primary"/>
-                </MagicButton>
-            )
-        );
         const deleteButton = authenticated && userHandle === handle ? (
             <DeleteDisregard disregardId={disregardId}/>
         ) : (
@@ -104,7 +66,7 @@ class Disregard extends Component {
                             color="textPrimary">
                                 {body}
                         </Typography>
-                        {respectButton}
+                        <RespectButton disregardId={disregardId}/>
                         <span>{respectCount} Respects</span>
                         <MagicButton tip="comments">
                             <ChatIcon color="primary"/>
@@ -122,6 +84,7 @@ class Disregard extends Component {
         )
     }
 };
+
 
 Disregard.propTypes = {
     user: PropTypes.object.isRequired
