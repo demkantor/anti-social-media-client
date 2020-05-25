@@ -8,10 +8,10 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import themeObject from '../../util/theme';
 import './App.css';
 
-import Home from '../Home/Home';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
-import Nav from '../Nav/Nav';
+import Home from '../Layout/Home';
+import Login from '../Layout/Login';
+import Register from '../Layout/Register';
+import Nav from '../Layout/Nav';
 import AuthRoute from '../../util/AuthRoute';
 
 // holds MUI themes spread through components

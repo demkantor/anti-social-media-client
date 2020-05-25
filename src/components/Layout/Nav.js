@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PostDisregard from '../PostDisregard/PostDisregard';
+import PostDisregard from '../Disregard/PostDisregard';
 import MagicButton from '../../util/MagicButton';
 
 import AppBar from '@material-ui/core/AppBar';

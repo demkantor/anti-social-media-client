@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
-import EditProfile from '../EditProfile/EditProfile';
+import EditProfile from './EditProfile';
 import MagicButton from '../../util/MagicButton';
 
 import withStyles from '@material-ui/core/styles/withStyles';

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import MagicButton from '../../util/MagicButton';
+import MagicButton from './MagicButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBoarder from '@material-ui/icons/FavoriteBorder';
 

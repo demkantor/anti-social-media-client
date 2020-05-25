@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MagicButton from '../../util/MagicButton';
-
 import dayjs from 'dayjs';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -15,7 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CloseIcon from '@material-ui/icons/Close';
 import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
-import RespectButton from '../RespectButton/RespectButton';
+import RespectButton from '../../util/RespectButton';
 
 
 const styles = (theme) => ({
