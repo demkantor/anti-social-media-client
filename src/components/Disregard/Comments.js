@@ -25,7 +25,7 @@ class Comments extends Component {
                         <>
                             <Grid item sm={12} key={createdAt}>
                                 <Grid container>
-                                    <Grid item sm={2}>
+                                    <Grid item sm={3}>
                                         <img src={userImage} alt="comment" className={classes.commentImage}/>
                                     </Grid>
                                 </Grid>

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MagicButton from '../../util/MagicButton';
+import RespectButton from '../../util/RespectButton';
 import Comments from './Comments';
+import CommentForm from './CommentForm';
 import dayjs from 'dayjs';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -15,7 +17,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CloseIcon from '@material-ui/icons/Close';
 import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
-import RespectButton from '../../util/RespectButton';
 
 
 const styles = (theme) => ({
@@ -31,6 +32,7 @@ class DisregardDialog extends Component {
 
     handleClose = () => {
         this.setState({ open: false });
+        // send dispatch to clear all erorrs once reducer is changed
     };
 
     handleOpen = () => {
@@ -73,6 +75,7 @@ class DisregardDialog extends Component {
                     <span>{commentCount} Comments</span>
                 </Grid>
                 <hr className={classes.invisibleSeperator}/>
+                <CommentForm disregardId={disregardId}/>
                 <Comments comments={comments}/>
             </Grid>
         )
@@ -108,7 +111,6 @@ class DisregardDialog extends Component {
 DisregardDialog.propTypes = {
     classes: PropTypes.object.isRequired,
     disregardId: PropTypes.string.isRequired,
-    userHandle: PropTypes.string.isRequired,
     disregard: PropTypes.object.isRequired
 };
 

@@ -9,6 +9,7 @@ function* disregardSaga() {
     yield takeEvery('DISRESPECT_DISREGARD', disrespectDisregard);
     yield takeEvery('DELETE_DISREGARD', deleteDisregard);
     yield takeEvery('POST_DISREGARD', postDisregard);
+    yield takeEvery('POST_COMMENT', postComment);
 };
 
 
@@ -88,5 +89,21 @@ function* getThisDisregard(single) {
     }
     yield put({ type: 'STOP_LOADING_UI' });
 };
+
+// posts a new comment to firebase
+function* postComment(com) {
+    console.log('in POST new comment saga', com);
+    yield put({ type: 'LOADING_UI' });
+    try {
+        yield axios.post(`/disregards/${com.payload.id}/comment`, com.payload.data);
+        yield put({ type: 'GET_ALL_DISREGARDS' });
+        yield put({ type: 'GET_THIS_USER' });
+    } catch (error) {
+        console.log('Error with POST comment:', error);
+        yield put({ type: 'STOP_LOADING_UI' });
+    }
+};
+
+
 
 export default disregardSaga;
