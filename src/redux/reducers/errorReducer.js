@@ -44,7 +44,7 @@ const disregardMessage = (state = '', action) => {
     };
 };
 
-// holds the string that will display on the registration screen if there's an error
+// holds the string that will display loading state in various components
 const ui = (state = { loading: false }, action) => {
     switch (action.type) {
         case 'LOADING_UI':

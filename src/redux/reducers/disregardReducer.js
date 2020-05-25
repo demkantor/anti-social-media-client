@@ -11,9 +11,17 @@ const allDisregards = (state = [], action) => {
     }
 };
 
-
+// stores single disregard
+const singleDisregard = (state = {}, action) => {
+    switch (action.type) {
+        case 'SET_THIS_DISREGARD':
+            return state = action.payload;
+        default:
+            return state;
+    }
+};
 
 export default combineReducers({
     allDisregards,
-
+    singleDisregard
 });

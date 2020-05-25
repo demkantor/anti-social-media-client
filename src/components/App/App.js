@@ -34,7 +34,7 @@ class App extends Component {
           this.props.dispatch({ type: 'SET_AUTHENTICATED' });
           this.props.dispatch({ type: 'GET_THIS_USER' });
       }
-  }
+  };
 
 
   render() {

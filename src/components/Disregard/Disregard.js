@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import MagicButton from '../../util/MagicButton';
 import DeleteDisregard from '../DeleteDisregard/DeleteDisregard';
+import DisregardDialog from '../DisregardDialog/DisregardDialog';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import Card from '@material-ui/core/Card';
@@ -67,7 +68,7 @@ class Disregard extends Component {
         const deleteButton = authenticated && userHandle === handle ? (
             <DeleteDisregard disregardId={disregardId}/>
         ) : (
-            <p>erase me</p>
+            <p></p>
         )
         return (
         <>
@@ -109,6 +110,9 @@ class Disregard extends Component {
                             <ChatIcon color="primary"/>
                         </MagicButton>
                         <span>{commentCount} Comments</span>
+                        <DisregardDialog 
+                            disregardId={disregardId} 
+                            userHandle={handle}/>
                     </CardContent>
                 </Card> 
             :

@@ -4,6 +4,7 @@ import { takeEvery, put } from "redux-saga/effects";
 // these sagas take the dispatch and runs them before they get to the reducers
 function* disregardSaga() {
     yield takeEvery('GET_ALL_DISREGARDS', getAllDisregards);
+    yield takeEvery('GET_THIS_DISREGARD', getThisDisregard);
     yield takeEvery('RESPECT_DISREGARD', respectDisregard);
     yield takeEvery('DISRESPECT_DISREGARD', disrespectDisregard);
     yield takeEvery('DELETE_DISREGARD', deleteDisregard);
@@ -75,5 +76,17 @@ function* deleteDisregard(remove) {
     }
 };
 
+// get a single disregard
+function* getThisDisregard(single) {
+    console.log('in GET single disregard saga', single.payload);
+    yield put({ type: 'LOADING_UI' });
+    try {
+        const singleDisregad = yield axios.get(`/disregards/${single.payload}`);
+        yield put({ type: 'SET_THIS_DISREGARD', payload: singleDisregad.data });
+    } catch (error) {
+        console.log('Error with GET single disregard:', error);
+    }
+    yield put({ type: 'STOP_LOADING_UI' });
+};
 
 export default disregardSaga;

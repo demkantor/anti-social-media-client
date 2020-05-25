@@ -117,12 +117,23 @@ export default {
           objectFit: 'cover',
       },
       submitButton: {
-        position: 'relative'
+        position: 'relative',
+        float: 'right',
+        marginTop: 10
       },
       closeButton: {
-        position: 'relative',
+        position: 'absolute',
         left: '90%',
-        top: '10%'
+        top: '5%'
+      },
+      profileImage: {
+        maxWidth: 200,
+        height: 200,
+        borderRadius: '50%',
+        objectFit: 'cover'
+      },
+      dialogContent: {
+        padding: 20
       }
   }
 };
