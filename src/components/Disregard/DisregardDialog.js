@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MagicButton from '../../util/MagicButton';
+import Comments from './Comments';
 import dayjs from 'dayjs';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -38,7 +39,7 @@ class DisregardDialog extends Component {
     };
 
     render() {
-        const { classes, disregard : { body, createdAt, userImage, userHandle, disregardId, respectCount, commentCount } } = this.props;
+        const { classes, disregard : { body, createdAt, userImage, userHandle, disregardId, respectCount, commentCount, comments } } = this.props;
         const dialogMarkup = this.props.errors.ui.loading ? (
             <div className={classes.spinnerDiv}>
                 <CircularProgress size={200} thickness={2}/>
@@ -71,6 +72,8 @@ class DisregardDialog extends Component {
                     </MagicButton>
                     <span>{commentCount} Comments</span>
                 </Grid>
+                <hr className={classes.invisibleSeperator}/>
+                <Comments comments={comments}/>
             </Grid>
         )
         return (
