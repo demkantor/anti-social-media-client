@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PostDisregard from '../Disregard/PostDisregard';
+import Notifications from './Notifications';
 import MagicButton from '../../util/MagicButton';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import HomeIcon from '@material-ui/icons/Home';
-import Notifications from '@material-ui/icons/Notifications';
-
-
 
 
 class Nav extends Component {
@@ -30,9 +28,7 @@ class Nav extends Component {
                                 Log out
                         </Button>
                         <PostDisregard/>
-                        <MagicButton tip="Notifications">
-                            <Notifications />
-                        </MagicButton>
+                        <Notifications />
                     </>
                     :
                     <>

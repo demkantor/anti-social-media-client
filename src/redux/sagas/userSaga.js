@@ -11,7 +11,7 @@ function* userSaga() {
     yield takeEvery('GET_USER_PAGE', getUserPage);
     yield takeEvery('UPLOAD_IMAGE', uploadImage);
     yield takeEvery('BIO_EDIT', bioEdit);
-   
+    yield takeEvery('MARK_READ', markRead);
 };
 
 function* loginUser(user) {
@@ -104,7 +104,7 @@ function* uploadImage(pic) {
 
 // user bio edit details sent to firebase
 function* bioEdit(user) {
-    yield console.log('in edit bio', user);
+    console.log('in edit bio saga', user);
     yield put({ type: 'LOADING_UI' });
     try {
         yield axios.post('/user', user.payload);
@@ -114,6 +114,16 @@ function* bioEdit(user) {
     }
 };
 
+// marks a users notification as read
+function* markRead(notification) {
+    yield console.log('saga marking notification as read', notification);
+    try {
+        yield axios.post('/notifications', notification.payload);
+        yield put({ type: 'GET_THIS_USER' });
+    } catch (error) {
+        console.log('Error marking notification as read:', error);
+    }
+};
 
 
 // holds current user's firebase token to be used in api headers
@@ -122,5 +132,6 @@ const setAuthorizationHeader = (token) => {
     localStorage.setItem('FBIdToken', FBIdToken);
     axios.defaults.headers.common['Authorization'] = FBIdToken;
 };
+
 
 export default userSaga;
