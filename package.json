@@ -2,7 +2,7 @@
   "name": "anti-social-network",
   "description": "A place where it's okay not to love social media",
   "author": "demkantor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "proxy": "https://us-central1-anti-social-media-7c6ba.cloudfunctions.net/api",
   "dependencies": {
