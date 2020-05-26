@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
@@ -51,6 +51,7 @@ class App extends Component {
               <AuthRoute exact path="/login" component={Login}/>
               <AuthRoute exact path="/register" component={Register}/>
               <Route exact path="/users/:handle" component={UserPage}/>
+              <Route exact path="/users/:handle/disregard/:disregardId" component={UserPage}/>
             </Switch>
           </div>
         </Router>

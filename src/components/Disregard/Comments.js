@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
@@ -22,8 +22,8 @@ class Comments extends Component {
                 {comments.map((comment) => {
                     const { body, createdAt, userImage, userHandle } = comment;
                     return (
-                        <>
-                            <Grid item sm={3} key={createdAt}>
+                        < Fragment key={createdAt}>
+                            <Grid item sm={3}>
                                 <Grid container>
                                     <Grid item sm={12}>
                                         <img src={userImage} alt="comment" className={classes.commentImage}/>
@@ -49,7 +49,7 @@ class Comments extends Component {
                                 </div>
                             </Grid>
                             <hr className={classes.visibleSeparator} />
-                        </>
+                        </ Fragment>
                     )
                 })}
             </Grid>

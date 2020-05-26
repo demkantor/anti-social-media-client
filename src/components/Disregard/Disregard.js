@@ -74,7 +74,8 @@ class Disregard extends Component {
                         <span>{commentCount} Comments</span>
                         <DisregardDialog 
                             disregardId={disregardId} 
-                            userHandle={handle}/>
+                            userHandle={userHandle}
+                            openDialog={this.props.openDialog}/>
                     </CardContent>
                 </Card> 
             :
@@ -87,7 +88,8 @@ class Disregard extends Component {
 
 
 Disregard.propTypes = {
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool
 };
 
 const putReduxStateOnProps = (reduxState) => ({

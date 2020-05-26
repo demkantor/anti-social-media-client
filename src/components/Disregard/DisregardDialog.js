@@ -28,16 +28,31 @@ class DisregardDialog extends Component {
 
     state = {
         open: false,
+        oldPath: '',
+        newPath: ''
+    };
+
+    componentDidMount = () => {
+        if(this.props.openDialog) {
+            this.handleOpen();
+        };
     };
 
     handleClose = () => {
         this.setState({ open: false });
+        window.history.pushState(null, null, this.state.oldPath);
         // send dispatch to clear all erorrs once reducer is changed
     };
 
     handleOpen = () => {
-        this.setState({ open: true });
-        this.props.dispatch({ type: 'GET_THIS_DISREGARD', payload: this.props.disregardId });
+        let oldPath = window.location.pathname;
+        const { userHandle, disregardId } = this.props
+        const newPath = `/users/${userHandle}/disregard/${disregardId}`
+        if(oldPath === newPath) oldPath = `/users/${userHandle}`
+        window.history.pushState(null, null, newPath);
+
+        this.setState({ open: true, oldPath, newPath });
+        this.props.dispatch({ type: 'GET_THIS_DISREGARD', payload: disregardId });
     };
 
     render() {
