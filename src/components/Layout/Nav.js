@@ -20,7 +20,7 @@ class Nav extends Component {
         return (
             <AppBar>
                 <Toolbar className="nav-container">
-                    {this.props.reduxState.user.token
+                    {this.props.reduxState.user.currentUser.authenticated
                     ?
                     <>
                         <Button 

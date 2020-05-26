@@ -41,7 +41,7 @@ class CommentForm extends Component {
                         name="body"
                         type="text"
                         label="Comment on disregard..."
-                        errors={this.props.errors.comment ? true : false}
+                        errors={this.props.errors.comment ? true : undefined}
                         helperText={this.props.errors.comment}
                         value={this.state.body}
                         onChange={this.handleChange}

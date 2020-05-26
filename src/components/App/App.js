@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
@@ -12,6 +13,7 @@ import Home from '../Layout/Home';
 import Login from '../Layout/Login';
 import Register from '../Layout/Register';
 import Nav from '../Layout/Nav';
+import UserPage from '../Profile/UserPage';
 import AuthRoute from '../../util/AuthRoute';
 
 // holds MUI themes spread through components
@@ -32,6 +34,7 @@ class App extends Component {
               window.location.href = '/login'
       } else 
           this.props.dispatch({ type: 'SET_AUTHENTICATED' });
+          axios.defaults.headers.common['Authorization'] = token;
           this.props.dispatch({ type: 'GET_THIS_USER' });
       }
   };
@@ -47,6 +50,7 @@ class App extends Component {
               <Route exact path="/" component={Home}/>
               <AuthRoute exact path="/login" component={Login}/>
               <AuthRoute exact path="/register" component={Register}/>
+              <Route exact path="/users/:handle" component={UserPage}/>
             </Switch>
           </div>
         </Router>

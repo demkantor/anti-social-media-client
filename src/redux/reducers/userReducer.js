@@ -22,6 +22,17 @@ const currentUser = (state = initialState, action) => {
     };
 };
 
+// stores requested user profile and disregards
+const requestedUser = (state = { data: {user: {}, disregards: []}}, action) => {
+    switch (action.type) {
+        case 'SET_REQUESTED_USER':
+            return state = action.payload;
+        case 'UNSET_REQUESTED_USER':
+            return state = action.payload;
+        default:
+            return state;
+    };
+};
 
 // stores logged in user's token
 const token = (state = '', action) => {
@@ -38,5 +49,6 @@ const token = (state = '', action) => {
 
 export default combineReducers({
     currentUser,
+    requestedUser,
     token
 });

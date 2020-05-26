@@ -8,6 +8,7 @@ function* userSaga() {
     yield takeEvery('LOGOUT', logoutUser);
     yield takeLatest('REGISTER_USER', registerUser);
     yield takeEvery('GET_THIS_USER', getThisUser);
+    yield takeEvery('GET_USER_PAGE', getUserPage);
     yield takeEvery('UPLOAD_IMAGE', uploadImage);
     yield takeEvery('BIO_EDIT', bioEdit);
    
@@ -64,14 +65,27 @@ function* registerUser(action) {
     }
 };
 
-//gets the current user info from firebase
-function* getThisUser(user){
+// gets the current user info from firebase
+function* getThisUser(){
     yield put({ type: 'LOADING_UI' });
-    console.log("We are here in user GET info saga", user.payload);
-    // const thisUser = yield axios.get(`/user/${user.payload}`);
+    console.log("We are here in user GET info saga");
     const thisUser = yield axios.get(`/user`);
     console.log('in saga - this user GET back with:', thisUser.data);
     yield put({ type: 'SET_USER', payload: thisUser.data });
+    yield put({ type: 'STOP_LOADING_UI' });
+};
+
+// gets any user from firebase by user handle
+function* getUserPage(user){
+    yield put({ type: 'LOADING_UI' });
+    console.log("We are here in user page GET info saga");
+    try {
+        const thisUser = yield axios.get(`/user/${user.payload}`);
+        console.log('in saga - this user page GET back with:', thisUser.data);
+        yield put({ type: 'SET_REQUESTED_USER', payload: thisUser.data });
+    }  catch (error) {
+        console.log('Error with image upload:', error);
+    }
     yield put({ type: 'STOP_LOADING_UI' });
 };
 
