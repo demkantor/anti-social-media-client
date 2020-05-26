@@ -155,6 +155,18 @@ export default {
       commentData: {
         marginLeft: 15,
         marginTop: 15
+      },
+      fullLine: {
+        height: 15,
+        width: '90%',
+        backgroundColor: 'rgba(0,0,0, 0.6)',
+        marginBottom: 10
+      },
+      halfLine: {
+        height: 15,
+        width: '50%',
+        backgroundColor: 'rgba(0,0,0, 0.6)',
+        marginBottom: 10
       }
   }
 };

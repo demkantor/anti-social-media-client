@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import EditProfile from './EditProfile';
+import ProfileSkeleton from '../Layout/Skeletons/ProfileSkeleton';
 import MagicButton from '../../util/MagicButton';
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -17,6 +18,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import EditIcon from '@material-ui/icons/Edit';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+
 
 
 const styles = (theme) => ({
@@ -126,7 +128,7 @@ class Profile extends Component {
 
         ) 
         : 
-        (<p>loading....</p>)
+        (<ProfileSkeleton/>)
 
         return profileMarkup;
     }

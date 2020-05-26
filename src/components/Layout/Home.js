@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
 import Disregard from '../Disregard/Disregard';
 import Profile from '../Profile/Profile';
+import DisregardSkeleton from '../Layout/Skeletons/DisregardSkeleton';
+import Grid from '@material-ui/core/Grid';
+
 
 class Home extends Component {
     
@@ -22,7 +24,7 @@ class Home extends Component {
                         ))}
                     </>
                     :
-                    <p>Loading...</p>
+                    <DisregardSkeleton/>
                     }
                 </Grid>
                 <Grid item sm={4} xs={12}>

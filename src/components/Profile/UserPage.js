@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Disregard from '../Disregard/Disregard';
 import RequestedProfile from './RequestedProfile';
+import DisregardSkeleton from '../Layout/Skeletons/DisregardSkeleton';
+import ProfileSkeleton from '../Layout/Skeletons/ProfileSkeleton';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -36,7 +38,7 @@ export class UserPage extends Component {
                 <>
                     {errors.loading 
                     ? (
-                    <p>loading....</p>
+                    <DisregardSkeleton/>
                     ) : (
                         <>
                         {this.props.requestedUser.disregards === null
@@ -70,7 +72,7 @@ export class UserPage extends Component {
                 ?
                     <RequestedProfile profile={this.props.requestedUser.user}/>
                 :
-                <p>Loading...</p>
+                <ProfileSkeleton/>
                 }
             </Grid>
           </Grid>
