@@ -16,12 +16,12 @@ class RespectButton extends Component {
     };
 
     respectDisregard = (disregardId) => {
-        console.log('HERE', disregardId)
+        // console.log('HERE', disregardId);
         this.props.dispatch({ type: 'RESPECT_DISREGARD', payload: disregardId });
     };
 
     respected = () => {
-        console.log(this.props.user.respects)
+        // console.log(this.props.user.respects);
         if(this.props.user.respects && this.props.user.respects.find(respect => respect.disregardId === this.props.disregardId)) {
             return true;
         } else {
@@ -51,7 +51,7 @@ class RespectButton extends Component {
         );
         return RespectButton;
     }
-}
+};
 
 
 RespectButton.propTypes = {

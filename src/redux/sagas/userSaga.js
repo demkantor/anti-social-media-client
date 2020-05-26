@@ -46,7 +46,7 @@ function* logoutUser() {
 };
 
 function* registerUser(action) {
-    console.log('in register new user saga', action)
+    // console.log('in register new user saga', action);
     try {
         const history = action.history
         yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
@@ -68,9 +68,9 @@ function* registerUser(action) {
 // gets the current user info from firebase
 function* getThisUser(){
     yield put({ type: 'LOADING_UI' });
-    console.log("We are here in user GET info saga");
+    // console.log("We are here in user GET info saga");
     const thisUser = yield axios.get(`/user`);
-    console.log('in saga - this user GET back with:', thisUser.data);
+    // console.log('in saga - this user GET back with:', thisUser.data);
     yield put({ type: 'SET_USER', payload: thisUser.data });
     yield put({ type: 'STOP_LOADING_UI' });
 };
@@ -78,7 +78,7 @@ function* getThisUser(){
 // gets any user from firebase by user handle
 function* getUserPage(user){
     yield put({ type: 'LOADING_UI' });
-    console.log("We are here in user page GET info saga");
+    // console.log("We are here in user page GET info saga");
     try {
         const thisUser = yield axios.get(`/user/${user.payload}`);
         console.log('in saga - this user page GET back with:', thisUser.data);
@@ -91,7 +91,7 @@ function* getUserPage(user){
 
 // uploads image to firebase
 function* uploadImage(pic) {
-    console.log('in upload image saga', pic);
+    // console.log('in upload image saga', pic);
     yield put({ type: 'LOADING_UI' });
     try {
         yield axios.post('/user/image', pic.payload);
@@ -104,7 +104,7 @@ function* uploadImage(pic) {
 
 // user bio edit details sent to firebase
 function* bioEdit(user) {
-    console.log('in edit bio saga', user);
+    // console.log('in edit bio saga', user);
     yield put({ type: 'LOADING_UI' });
     try {
         yield axios.post('/user', user.payload);
@@ -116,7 +116,7 @@ function* bioEdit(user) {
 
 // marks a users notification as read
 function* markRead(notification) {
-    yield console.log('saga marking notification as read', notification);
+    // console.log('saga marking notification as read', notification);
     try {
         yield axios.post('/notifications', notification.payload);
         yield put({ type: 'GET_THIS_USER' });
