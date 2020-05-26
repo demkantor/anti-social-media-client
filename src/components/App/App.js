@@ -19,6 +19,7 @@ import AuthRoute from '../../util/AuthRoute';
 // holds MUI themes spread through components
 const theme = createMuiTheme(themeObject);
 
+axios.defaults.baseURL = 'https://us-central1-anti-social-media-7c6ba.cloudfunctions.net/api';
 
 class App extends Component {
 
