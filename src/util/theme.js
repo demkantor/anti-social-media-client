@@ -148,10 +148,13 @@ export default {
         width: 100,
         height: 100,
         objectFit: 'cover',
-        borderRadius: '50%'
+        borderRadius: '50%',
+        padding: 10,
+        marginLeft: 10,
       },
       commentData: {
-        marginLeft: 20
+        marginLeft: 15,
+        marginTop: 15
       }
   }
 };

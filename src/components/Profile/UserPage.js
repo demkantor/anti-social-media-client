@@ -16,7 +16,7 @@ export class UserPage extends Component {
         this.props.dispatch({ type: 'GET_USER_PAGE', payload: handle});
     };
 
-    
+
     render() {
         const errors = this.props
         return (
@@ -44,8 +44,11 @@ export class UserPage extends Component {
                 }
             </Grid>
             <Grid item sm={4} xs={12}>
-                {this.props.requestedUser.user &&
-              <RequestedProfile profile={this.props.requestedUser.user}/>
+                {this.props.requestedUser.user 
+                ?
+                    <RequestedProfile profile={this.props.requestedUser.user}/>
+                :
+                <p>Loading...</p>
                 }
             </Grid>
           </Grid>
