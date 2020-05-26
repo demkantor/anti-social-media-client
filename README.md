@@ -3,10 +3,10 @@
     check out the app [here](https://anti-social-media-7c6ba.web.app/)
 
 ### Backend built with Firebase
-    find it [here](https://github.com/demkantor/anti-social-media-server-side)
+find it [here](https://github.com/demkantor/anti-social-media-server-side)
 
 ### Screenshots
-    ![Screenshot](/public/images/screenshot.gif?raw=true "Into Gif")
+![Screenshot](/public/images/screenshot.gif?raw=true "Into Gif")
 
 ### Getting started
 
