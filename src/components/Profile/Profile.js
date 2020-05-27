@@ -125,7 +125,6 @@ class Profile extends Component {
                     </Button>
                 </div>
             </Paper>
-
         ) 
         : 
         (<ProfileSkeleton/>)

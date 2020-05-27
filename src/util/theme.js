@@ -3,16 +3,16 @@ export default {
   // main color scheme
     palette: {
       primary: {
-        light: '#33c9dc',
-        main: '#00bcd4',
-        dark: '#008394',
-        contrastText: '#fff'
+        light: '#ab96b1',
+        main: '#8E7C93',
+        dark: '#36435e',
+        contrastText: '#fffff1'
       },
       secondary: {
         light: '#ff6333',
-        main: '#ff3d00',
-        dark: '#b22a00',
-        contrastText: '#fff'
+        main: '#51368D',
+        dark: '#34205f',
+        contrastText: '#fffff1'
       }
     },
     
@@ -80,7 +80,7 @@ export default {
             verticalAlign: 'middle'
           },
           '& a': {
-            color: '#00bcd4'
+            color: '#51368D'
           }
         },
         '& hr': {

@@ -15,6 +15,9 @@ class Home extends Component {
     render() {
         return (
             <Grid container spacing={10}>
+                <Grid item sm={4} xs={12}>
+                    <Profile/>
+                </Grid>
                 <Grid item sm={8} xs={12}>
                     {this.props.reduxState.disregards.allDisregards 
                     ?
@@ -26,9 +29,6 @@ class Home extends Component {
                     :
                     <DisregardSkeleton/>
                     }
-                </Grid>
-                <Grid item sm={4} xs={12}>
-                    <Profile/>
                 </Grid>
             </Grid>
         )

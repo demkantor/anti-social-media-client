@@ -1,8 +1,23 @@
+:root {
+  --text-one: #4a1d55;
+  --text-two: #8E7C93;
+  --text-three: #485665;
+  --text-four: #51368D;
+  --text-five: #fffff1;
+  --text-six: #ab96b1;
+  --text-seven: #36435e;
+  --text-eight: #34205f;
+  --text-nine: #cccaca;
+}
+
 html, body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
-  background-color: #cccaca;
+  font-family: 'Roboto', 'Ubuntu', sans-serif;
+  background: linear-gradient(var(--text-three), var(--text-seven));
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container {
@@ -10,15 +25,20 @@ html, body {
   max-width: 1200px;
 }
 
-.nav-container {
-  margin: auto;
+.final-el{
+  margin-left: auto;
 }
 
 .nav-container svg{
-  color: #ffffff
+  color: var(--text-five)
 }
 
 a {
   text-decoration: none;
 }
+  
+  
 
+@media only screen and (max-width: 600px) {
+
+}

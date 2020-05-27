@@ -1,6 +1,8 @@
 ## Anti-Social-Network
     This is the front end built with JavaScript and React
-    check out the app [here](https://anti-social-media-7c6ba.web.app/)
+
+#### Check out the app 
+[here](https://anti-social-media-7c6ba.web.app)
 
 ### Backend built with Firebase
 find it [here](https://github.com/demkantor/anti-social-media-server-side)

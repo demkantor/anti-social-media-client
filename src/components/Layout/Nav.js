@@ -16,7 +16,7 @@ class Nav extends Component {
 
     render() {
         return (
-            <AppBar>
+            <AppBar className="nav-wrapper">
                 <Toolbar className="nav-container">
                     {this.props.reduxState.user.currentUser.authenticated
                     ?
@@ -36,7 +36,7 @@ class Nav extends Component {
                         <Button color="inherit" component={Link} to="/register">Register</Button>
                     </>
                     }                  
-                        <Link to='/'>
+                        <Link to='/' className="final-el">
                             <MagicButton tip="Home">
                                 <HomeIcon color="primary"/>
                             </MagicButton>
